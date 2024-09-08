@@ -2,7 +2,7 @@ import { LightningElement, api, wire, track } from 'lwc';
 import getRelatedFilesByRecordId from '@salesforce/apex/SCISInstallationImgPdfController.getRelatedFilesByRecordId';
 import { refreshApex } from '@salesforce/apex';
 
-export default class ScisInstallationpdfImgComponent extends LightningElement {
+export default class scisInstallationImgDoc extends LightningElement {
     @api recordId;
     @track pdfs = [];
     @track images = [];
@@ -27,13 +27,6 @@ export default class ScisInstallationpdfImgComponent extends LightningElement {
             })) : [];
         } else if (error) {
             console.error('Error fetching files:', error);
-        }
-    }
-
-    handlePdfClick(event) {
-        const url = event.target.getAttribute('data-url');
-        if (url) {
-            window.open(url, '_blank');
         }
     }
 

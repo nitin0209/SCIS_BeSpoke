@@ -6,14 +6,14 @@
                 <template if:true={pdfs}>
                     <template for:each={pdfs} for:item="pdf">
                         <div key={pdf.id} class="slds-p-around_small">
-                            <!-- <h3>Please click to view Document</h3> -->
-                            <lightning-button
-                                variant="brand"
-                                label="View Document"
-                                onclick={handlePdfClick}
-                                data-url={pdf.url}
-                                data-title={pdf.title}
-                            ></lightning-button>
+                            <h3>{pdf.title}</h3>
+                            <iframe
+                                src={pdf.url}
+                                width="100%"
+                                height="600px"
+                                style="border: none;"
+                                title={pdf.title}
+                            ></iframe>
                         </div>
                     </template>
                 </template>
