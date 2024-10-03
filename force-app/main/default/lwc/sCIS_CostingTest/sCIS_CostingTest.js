@@ -36,6 +36,7 @@ export default class ScisFunderCosting extends LightningElement {
     @track isError = false; // To handle error state
     @track isDataLoaded = false; // To handle data loaded state
     @track errorMessage; // To store any error message
+    @api profitPercentage;
 
     // Fetch Survey details (Name and OwnerId)
     @wire(getRecord, { recordId2: '$recordId', fields: FIELDS })
@@ -190,6 +191,24 @@ export default class ScisFunderCosting extends LightningElement {
         return totalWeGet > 0 ? ((profitAmount / totalWeGet) * 100).toFixed(2) : '0.00';
     }
 
+    // updated percentage bar
+
+    // Getter to compute the class based on profitPercentage
+    get percentageClass() {
+        if (this.profitPercentage >= 35) {
+            return 'green-bar';
+        } else if (this.profitPercentage > 0 && this.profitPercentage < 35) {
+            return 'yellow-bar';
+        } else {
+            return 'red-bar';
+        }
+    }
+
+    // Getter to compute the width of the progress bar
+    get percentageWidth() {
+        return `${this.profitPercentage}%`;
+    }
+
     // Calculate funder average price
     get funderAveragePrice() {
         const totalFunderPrice = this.funders.reduce((sum, funder) => sum + funder.price, 0);
@@ -297,7 +316,7 @@ export default class ScisFunderCosting extends LightningElement {
 
                 // Trigger price calculation once cost savings data is available
                 this.updatePriceWeGet();
-                
+
                 this.isDataLoaded = true;
                 this.isLoading = false;
             })

@@ -336,12 +336,30 @@
             </div>
 
             <!-- Profit Percent -->
-            <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+            <!-- <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
                 <strong>Profit Percent:</strong>
             </div>
             <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
                 <span>{profitPercentage}%</span>
-            </div>
+            </div> -->
+
+            <!-- update percentage bar -->
+
+            
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <p>Profit Percent =</p>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <!-- Progress bar container -->
+                    <div class="progress-container">
+                        <!-- Progress bar, style dynamically applied based on percentageClass and percentageWidth -->
+                        <div class={percentageClass} style="width: {percentageWidth};">
+                            {profitPercentage} %
+                        </div>
+                    </div>
+                </div>
+            
+
         </div>
     </div>
         <!-- <div class="slds-col slds-size_1-of-1 slds-p-bottom_x-small">

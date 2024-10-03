@@ -90,7 +90,7 @@ public with sharing class SAPBandCostingController {
     // Method to get the Intermediate SAP Band based on the SAP Rating
     public static String getIntermediateSAPBand(Decimal sapRating) {
         if (sapRating >= 96) {
-            return 'High A';
+            return 'High_A';
         } else if (sapRating <= 91.40 && sapRating > 86) {
             return 'High_B';
         } else if (sapRating <= 80.40 && sapRating > 74.50) {
@@ -100,7 +100,7 @@ public with sharing class SAPBandCostingController {
         } else if (sapRating <= 54.40 && sapRating > 46.50) {
             return 'High_E';
         } else if (sapRating <= 38.40 && sapRating > 29.50) {
-            return 'High F';
+            return 'High_F';
         } else if (sapRating <= 20.40 && sapRating > 10.50) {
             return 'High_G';
         

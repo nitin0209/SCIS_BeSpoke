@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="Percentage Card">
+    <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <p>Profit Percent =</p>
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+            <!-- Progress bar container -->
+            <div class="progress-container">
+                <!-- Progress bar, style dynamically applied based on percentageClass and percentageWidth -->
+                <div class={percentageClass} style="width: {percentageWidth};">
+                    {profitPercentage} %
+                </div>
+            </div>
+        </div>
+    </div>
+    </lightning-card>
+</template>
