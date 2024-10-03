@@ -1,0 +1,77 @@
+<template>
+    <lightning-card title="Costing Checkbox Example" icon-name="custom:custom14">
+        <!-- Show edit mode -->
+        <template if:true={isEditMode}>
+            <h3 class="slds-text-heading_medium">If you are updating the costing details, make sure to select all the desired values. All the selected values will be updated accordingly.</h3>
+            <div class="slds-grid slds-wrap slds-p-around_small">
+                <!-- Normal Bead Checkbox -->
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input 
+                        type="checkbox" 
+                        label="Normal Bead" 
+                        data-field="Normal_Bead__c" 
+                        onchange={handleCheckboxChange}>
+                    </lightning-input>
+                    <span>{displayValues.Normal_Bead__c}</span>
+                </div>
+
+                <!-- RIR Checkbox -->
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input 
+                        type="checkbox" 
+                        label="RIR" 
+                        data-field="RIR__c" 
+                        onchange={handleCheckboxChange}>
+                    </lightning-input>
+                    <span>{displayValues.RIR__c}</span>
+                </div>
+
+                <!-- Loft Checkbox -->
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input 
+                        type="checkbox" 
+                        label="Loft" 
+                        data-field="Loft__c" 
+                        onchange={handleCheckboxChange}>
+                    </lightning-input>
+                    <span>{displayValues.Loft__c}</span>
+                </div>
+
+                <!-- Mechanical Vents Checkbox -->
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input 
+                        type="checkbox" 
+                        label="Mechanical Vents" 
+                        data-field="Mechanical_Vents__c" 
+                        onchange={handleCheckboxChange}>
+                    </lightning-input>
+                    <div class="slds-p-top_small">
+                        <lightning-input 
+                            type="number" 
+                            label="Quantity" 
+                            value={mechanicalVentsQuantity} 
+                            onchange={handleMechanicalVentsQuantityChange}>
+                        </lightning-input>
+                    </div>
+                    <span>{displayValues.Mechanical_Vents_Cost}</span>
+                </div>
+
+                <!-- EPR Fee Checkbox -->
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input 
+                        type="checkbox" 
+                        label="EPR Fee" 
+                        data-field="EPR_fee__c" 
+                        onchange={handleCheckboxChange}>
+                    </lightning-input>
+                    <span>{displayValues.EPR_fee__c}</span>
+                </div>
+            </div>
+        </template>
+
+        <!-- Button to enter edit mode -->
+        <template if:false={isEditMode}>
+            <lightning-button label="Edit" variant="brand" onclick={handleEdit}></lightning-button>
+        </template>
+    </lightning-card>
+</template>

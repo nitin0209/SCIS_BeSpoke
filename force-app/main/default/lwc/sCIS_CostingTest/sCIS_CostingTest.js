@@ -78,6 +78,8 @@ export default class ScisFunderCosting extends LightningElement {
             console.error('Error fetching costing details:', error);
         }
     }
+    
+    
 
     // Handle Normal Bead Checkbox Change
     handleNormalBeadChange(event) {
@@ -240,14 +242,21 @@ export default class ScisFunderCosting extends LightningElement {
             tmLodgement: this.fieldVisibility.TM_Lodgement__c ? this.costingDetails.TM_Lodgement__c : 0,
             funderPrice: this.funderAveragePrice,
             priceWeGet: this.priceWeGet,
-            //propertyOwner: this.recordId,
             profitAmount: this.profitAmount
         };
-
+    
+        // Check if we are updating or creating a new record
+        if (this.existingCostingId) {  // If an existing record Id is available, we pass it to update
+            costingData.Id = this.existingCostingId;
+        }
+    
         // Call the Apex save method
         saveCosting(costingData)
             .then(() => {
                 this.isSaved = true;
+                this.isSummary = false;
+                this.isFinish = true;
+                window.scrollTo(0, 0);
                 this.dispatchEvent(new ShowToastEvent({
                     title: 'Success',
                     message: 'Costing record saved successfully!',
@@ -261,29 +270,23 @@ export default class ScisFunderCosting extends LightningElement {
                     variant: 'error'
                 }));
             });
-             this.isFinish = true;
-            
     }
     
 
     // Handle "Finish" button click (you can redirect or perform some other finalization logic)
     handleFinish() {
-        this.isSummary = false;
-        this.isSaved = false;
-        this.isFinish = true;
+        this.isSaved = true;
+        this.isFinish = false;
+        this.isSummary= true;
     }
    
     
-    handleFinish(){
-        this.isFinish = false;
-        this.isSummary = true;
-        this.isSaved = true;
-    }
+    
     handleEdit(){
         this.isFinish = false;
-        this.isSummary = false;
+        this.isSummary= false;  
         this.isSaved = false;
-        
+        window.scrollTo(0, 0);
     }
 
     get normalBeadStatus() {
@@ -347,4 +350,8 @@ export default class ScisFunderCosting extends LightningElement {
     get showData() {
         return this.isDataLoaded && !this.isError;
     }
+
+   
+
+    
 }

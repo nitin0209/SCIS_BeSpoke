@@ -347,7 +347,7 @@
 
             
                 <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <p>Profit Percent =</p>
+                    <p>Profit Percent :</p>
                 </div>
                 <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
                     <!-- Progress bar container -->
@@ -383,23 +383,11 @@
     </lightning-card>
 </template>
 
- <!-- Success message and buttons after saving -->
  
-    <!-- Success message and Finish Button after saving -->
-    <template if:true={isFinish}>
-        <lightning-card>
-            <h2 class="custom-heading">Costing saved successfully.</h2>
-            <div class="slds-p-around_medium">
-                <!-- Finish Button (only displayed when saving is completed) -->
-                <div class="funderButton">
-                    <lightning-button label="FINISH" variant="brand" onclick={handleFinish}></lightning-button>
-                </div>
-            </div>
-        </lightning-card>
-    </template>
+
 
     <!-- Display Summary if isSummary is true -->
-    <template if:true={isSummary}>
+    <template if:true={isSummary} >
         <lightning-card>
             <h3 class="custom-message">
                 Costing has already been done.
@@ -570,6 +558,20 @@
             </div>
         </lightning-card>
     </template>
+
+     <!-- Success message and buttons after saving -->
+    <template if:true={isFinish}>
+        <lightning-card>
+            <h2 class="custom-heading">Costing saved successfully.</h2>
+            <div class="slds-p-around_medium">
+                <!-- Finish Button (only displayed when saving is completed) -->
+                <div class="funderButton">
+                    <lightning-button label="FINISH" variant="brand" onclick={handleFinish}></lightning-button>
+                </div>
+            </div>
+        </lightning-card>
+    </template>
+
 
 </template>
 
