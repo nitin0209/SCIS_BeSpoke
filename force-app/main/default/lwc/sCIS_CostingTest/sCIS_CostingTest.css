@@ -1,0 +1,209 @@
+.slds-col {
+    padding-right: 1rem; /* Add some padding between the columns */
+}
+
+.slds-p-bottom_x-small {
+    padding-bottom: 0.5rem;
+}
+
+.mechanical-vents-checkbox {
+    max-width: 250px; /* Adjusts width of checkbox section */
+}
+
+.mechanical-vents-quantity {
+    max-width: 250px; /* Adjusts width of input field next to checkbox */
+}
+ 
+
+
+/* updated css for this */
+
+/* scisFunderCosting.css */
+.slds-card {
+    margin-bottom: 20px;
+}
+
+.slds-grid {
+    row-gap: 15px; /* Adds spacing between rows */
+}
+
+.field-value {
+    font-weight: bold;
+    color: #0a0a0a;
+}
+
+.profit-bar {
+    border-radius: 4px;
+    background-color: green;
+    height: 20px;
+    transition: width 0.3s ease;
+}
+
+.lightning-input {
+    margin-bottom: 10px;
+}
+
+table.slds-table {
+    margin-top: 15px;
+}
+
+.slds-table th, .slds-table td {
+    padding: 10px;
+}
+
+.slds-text-title_caps {
+    text-transform: uppercase;
+}
+
+.slds-float_right {
+    float: right;
+}
+
+.slds-p-top_medium, .slds-p-bottom_x-small {
+    padding-top: 1rem;
+}
+
+.slds-p-top_x-small {
+    padding-top: 0.5rem;
+}
+
+strong {
+    color: #000;
+}
+
+hr {
+    margin: 15px 0;
+    border: none;
+    border-top: 2px solid #ccc;
+}
+
+
+.slds-table {
+    table-layout: auto;
+    width: 100%;
+}
+
+.slds-table th, .slds-table td {
+    text-align: left;
+    padding: 0.75rem;
+}
+
+.custom-heading {
+    font-size: 1.7rem; /* Set the font size */
+    font-weight: bold; /* Make the text bold */
+    color: #0beb52; /* A bright blue color, can be customized */
+    margin-bottom: 1rem; /* Add space below the heading */
+    text-align: center; /* Center align the heading */
+    text-transform: uppercase; /* Transform the text to uppercase */
+    letter-spacing: 0.05rem; /* Add some letter spacing for better readability */
+    border-bottom: 2px solid #d9e0e7; /* Add a subtle border below the heading */
+    padding-bottom: 0.5rem; /* Add some padding at the bottom */
+}
+.custom-heading1 {
+    font-size: 1.5rem; /* Set the font size */
+    font-weight: bold; /* Make the text bold */
+    color: #0bc2eb; /* A bright blue color, can be customized */
+    margin-bottom: 1rem; /* Add space below the heading */
+    text-align: center; /* Center align the heading */
+    text-transform: uppercase; /* Transform the text to uppercase */
+    letter-spacing: 0.05rem; /* Add some letter spacing for better readability */
+    border-bottom: 2px solid #d9e0e7; /* Add a subtle border below the heading */
+    padding-bottom: 0.5rem; /* Add some padding at the bottom */
+}
+
+/* funder details css */
+.funderDetails {
+    background-color: #f4f6f9; /* Light background color to highlight the section */
+    padding: 1rem; /* Provide some padding to the container */
+    border-radius: 0.25rem; /* Rounded corners for a modern look */
+    border: 1px solid #d8dde6; /* Subtle border to define the section */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+.funderDetails strong {
+    font-weight: 600;
+    color: #4a4a4a; /* Darker color for emphasis */
+}
+
+.funderDetails span {
+    font-weight: 500;
+    color: #2b2b2b; /* Slightly lighter color for contrast */
+}
+
+.funderDetails hr {
+    border: none;
+    height: 1px;
+    background-color: #d8dde6; /* Light gray horizontal rule */
+    margin: 1rem 0; /* Spacing above and below the HR line */
+}
+
+.slds-col {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.slds-col span {
+    text-align: right; /* Align values to the right */
+}
+
+.profit-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #f4f4f4; /* Placeholder for the profit bar background */
+    margin-top: 1rem;
+    border-radius: 5px;
+}
+
+.profit-bar-inner {
+    height: 100%;
+    background-color: #4caf50; /* Dynamic based on profit percentage */
+    border-radius: 5px;
+}
+
+/* funder button css */
+
+.funderButton {
+    display: flex;
+    justify-content: flex-end; /* Align the buttons to the right */
+    padding: 1rem; /* Add some padding around the buttons */
+    background-color: #fff; /* Subtle background color to make it stand out */
+    border-top: 1px solid #d8dde6; /* A light border at the top to separate it from the content above */
+}
+
+.funderButton .slds-col {
+    display: flex;
+    gap: 1rem; /* Add space between the buttons */
+    align-items: center; /* Align buttons vertically */
+}
+
+.funderButton lightning-button {
+    font-size: 1rem; /* Adjust font size to make it consistent */
+    padding: 0.5rem 1.5rem; /* Make the buttons more clickable by increasing padding */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a slight shadow for a button lift effect */
+}
+
+.funderButton lightning-button.variant-brand {
+    background-color: #0176d3; /* Brand color for the 'Save' button */
+    color: white; /* Ensure the text is white for contrast */
+    border-radius: 0.25rem; /* Rounded corners for a modern look */
+}
+
+.funderButton lightning-button:hover {
+    background-color: #d6e9e5; /* Darker blue on hover for 'Save' button */
+}
+
+.funderButton lightning-button:first-child:hover {
+    background-color: #f4f4f4; /* Light gray on hover for the 'Previous' button */
+    color: #333; /* Darker text on hover */
+}
+
+.custom-message {
+    color: #ef8d77; /* Orange/red color */
+    font-size: 18px; /* Set the font size to 18px */
+    font-weight: bold; /* Bold text */
+    text-align: center; /* Center align the text */
+    margin: 20px 0; /* Add top and bottom margin */
+}
+
+

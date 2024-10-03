@@ -1,0 +1,90 @@
+.slds-col {
+    padding-right: 1rem; /* Add some padding between the columns */
+}
+
+.slds-p-bottom_x-small {
+    padding-bottom: 0.5rem;
+}
+
+.mechanical-vents-checkbox {
+    max-width: 250px; /* Adjusts width of checkbox section */
+}
+
+.mechanical-vents-quantity {
+    max-width: 250px; /* Adjusts width of input field next to checkbox */
+}
+ 
+
+
+/* updated css for this */
+
+/* scisFunderCosting.css */
+.slds-card {
+    margin-bottom: 20px;
+}
+
+.slds-grid {
+    row-gap: 15px; /* Adds spacing between rows */
+}
+
+.field-value {
+    font-weight: bold;
+    color: #0a0a0a;
+}
+
+.profit-bar {
+    border-radius: 4px;
+    background-color: green;
+    height: 20px;
+    transition: width 0.3s ease;
+}
+
+.lightning-input {
+    margin-bottom: 10px;
+}
+
+table.slds-table {
+    margin-top: 15px;
+}
+
+.slds-table th, .slds-table td {
+    padding: 10px;
+}
+
+.slds-text-title_caps {
+    text-transform: uppercase;
+}
+
+.slds-float_right {
+    float: right;
+}
+
+.slds-p-top_medium, .slds-p-bottom_x-small {
+    padding-top: 1rem;
+}
+
+.slds-p-top_x-small {
+    padding-top: 0.5rem;
+}
+
+strong {
+    color: #000;
+}
+
+hr {
+    margin: 15px 0;
+    border: none;
+    border-top: 2px solid #ccc;
+}
+
+
+.slds-table {
+    table-layout: auto;
+    width: 100%;
+}
+
+.slds-table th, .slds-table td {
+    text-align: left;
+    padding: 0.75rem;
+}
+
