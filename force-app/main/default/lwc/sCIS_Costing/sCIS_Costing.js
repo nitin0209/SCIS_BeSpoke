@@ -48,6 +48,12 @@ export default class ScisFunderCosting extends LightningElement {
     wiredCostingResult; // To store the result of the wire service
     refreshIntervalId; // To store the interval ID for auto-refresh
 
+
+    // Fetch the data when the component is initialized
+    connectedCallback() {
+        this.fetchSAPCostingData();
+    }
+
     // Fetch Survey details (Name and OwnerId)
     @wire(getRecord, { recordId: '$recordId', fields: FIELDS })
     wiredSurvey({ error, data }) {
@@ -285,6 +291,19 @@ export default class ScisFunderCosting extends LightningElement {
                     variant: 'error'
                 }));
             });
+
+        //      // Check if SAP Band data is available
+        // if (!this.currentSAPBand || !this.potentialSAPBand || !this.costSavings || this.costSavings === 'Not Available') {
+        //     // Show error toast if SAP Band data is missing
+        //     this.dispatchEvent(
+        //         new ShowToastEvent({
+        //             title: 'Error',
+        //             message: 'Please fetch SAP Band and Cost Savings before saving.',
+        //             variant: 'error'
+        //         })
+        //     );
+        //     return; // Prevent save if data is not available
+        // }
     }
     
 
@@ -313,10 +332,7 @@ export default class ScisFunderCosting extends LightningElement {
 
    
 
-    // Fetch the data when the component is initialized
-    connectedCallback() {
-        this.fetchSAPCostingData();
-    }
+    
 
     // Method to fetch SAP Band and Cost Savings
     fetchSAPCostingData() {

@@ -1,59 +1,81 @@
-import { LightningElement, api, track } from 'lwc';
-import getSAPAndCostSavings from '@salesforce/apex/SAPBandCostingController.getSAPAndCostSavings';
+import { LightningElement, track, api } from 'lwc';
 
-export default class SapBandCosting extends LightningElement {
-    @api recordId; // ID of the Survey record to be passed from the parent component or page
-    @track currentSAPBand; // To store the current SAP band
-    @track potentialSAPBand; // To store the potential SAP band
-    @track costSavings; // To store the cost savings
-    @track isLoading = true; // To handle the loading state
-    @track isError = false; // To handle error state
-    @track isDataLoaded = false; // To handle data loaded state
-    @track errorMessage; // To store any error message
+export default class CostingComponent extends LightningElement {
+    @api recordId; // The record ID (Property Owner or other relevant ID)
+    
+    // Manage different page states
+    @track isFirstPage = true;
+    @track isSecondPage = false;
+    @track isThirdPage = false;
 
-    // Fetch the data when the component is initialized
+    @track fieldVisibility = {}; // Track checkbox visibility
+    @track currentValues = {}; // Store current values from inputs
+    @track savedValues = {}; // Store saved values
+    @track previousValues = {}; // Store previously saved values for editing
+    
+    // Sample values, assume this is your costing data (can come from Apex or static for now)
+    @track costingRecords = {
+        Normal_Bead__c: 0,
+        Innovation_Bead__c: 13.05,
+        RIR__c: 0,
+    };
+
     connectedCallback() {
-        this.fetchSAPCostingData();
+        // Initially load any saved values if available
+        this.loadCostingData();
     }
 
-    // Method to fetch SAP Band and Cost Savings
-    fetchSAPCostingData() {
-        this.isLoading = true;
-        this.isError = false;
-        getSAPAndCostSavings({ surveyId: this.recordId })
-            .then((result) => {
-                // Store the result in component variables
-                this.currentSAPBand = result.currentSAPBand || 'No Band'; // Display 'No Band' if no data
-                this.potentialSAPBand = result.potentialSAPBand || 'No Band'; // Display 'No Band' if no data
-                this.costSavings = result.costSavings !== undefined ? result.costSavings : 'Not Available'; // Handle case if cost savings are not available
-                this.isDataLoaded = true;
-                this.isLoading = false;
-            })
-            .catch((error) => {
-                // Handle the error
-                this.errorMessage = error.body ? error.body.message : 'Unknown error';
-                this.isError = true;
-                this.isLoading = false;
-            });
+    loadCostingData() {
+        // Load costing data into current values (this could come from Apex)
+        this.currentValues = { ...this.costingRecords };
     }
 
-    // Method to handle retry in case of error
-    handleRetry() {
-        this.isError = false;
-        this.isLoading = true;
-        this.fetchSAPCostingData();
+    // Handle checkbox changes
+    handleCheckboxChange(event) {
+        const field = event.target.dataset.id;
+        this.fieldVisibility[field] = event.target.checked; // Track if the checkbox is checked
     }
 
-    // Template getters for conditional rendering
-    get showLoading() {
-        return this.isLoading;
+    // Handle input field changes
+    handleFieldChange(event) {
+        const field = event.target.dataset.id;
+        this.currentValues[field] = event.target.value; // Update current value
     }
 
-    get showError() {
-        return this.isError;
+    // Handle Save on First Page
+    handleSave() {
+        // Save current values to savedValues and proceed to second page
+        this.savedValues = { ...this.currentValues };
+
+        // Switch to second page (show saved values)
+        this.isFirstPage = false;
+        this.isSecondPage = true;
     }
 
-    get showData() {
-        return this.isDataLoaded && !this.isError;
+    // Handle Edit button on Second Page
+    handleEdit() {
+        // Store saved values into previousValues for comparison/editing
+        this.previousValues = { ...this.savedValues };
+
+        // Switch to third page (edit previous and new values)
+        this.isSecondPage = false;
+        this.isThirdPage = true;
+    }
+
+    // Handle Save on Third Page (Edit Mode)
+    handleSaveEdit() {
+        // Save current values after editing
+        this.savedValues = { ...this.currentValues };
+
+        // Switch back to second page (summary of saved values)
+        this.isThirdPage = false;
+        this.isSecondPage = true;
+    }
+
+    // Handle Cancel on Third Page
+    handleCancelEdit() {
+        // Discard changes and revert to second page
+        this.isThirdPage = false;
+        this.isSecondPage = true;
     }
 }

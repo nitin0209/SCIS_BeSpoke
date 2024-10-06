@@ -1,20 +1,109 @@
 <template>
-    <template if:true={showLoading}>
-        <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+    <!-- First Page: Checkbox and Editable Input -->
+    <template if:true={isFirstPage}>
+        <lightning-card>
+            <h3>Select and Input Values</h3>
+            
+            <!-- Checkbox for Normal Bead -->
+            <lightning-input type="checkbox" label="Normal Bead" checked={fieldVisibility.Normal_Bead__c} onchange={handleCheckboxChange} data-id="Normal_Bead__c"></lightning-input>
+            <template if:true={fieldVisibility.Normal_Bead__c}>
+                <lightning-input type="number" label="Normal Bead Value" value={currentValues.Normal_Bead__c} onchange={handleFieldChange} data-id="Normal_Bead__c"></lightning-input>
+            </template>
+
+            <!-- Checkbox for Innovation Bead -->
+            <lightning-input type="checkbox" label="Innovation Bead" checked={fieldVisibility.Innovation_Bead__c} onchange={handleCheckboxChange} data-id="Innovation_Bead__c"></lightning-input>
+            <template if:true={fieldVisibility.Innovation_Bead__c}>
+                <lightning-input type="number" label="Innovation Bead Value" value={currentValues.Innovation_Bead__c} onchange={handleFieldChange} data-id="Innovation_Bead__c"></lightning-input>
+            </template>
+
+            <!-- Add more checkboxes and inputs as required -->
+
+            <!-- Save Button -->
+            <div class="slds-m-top_medium">
+                <lightning-button label="Save" variant="brand" onclick={handleSave}></lightning-button>
+            </div>
+        </lightning-card>
     </template>
 
-    <template if:true={showError}>
-        <div class="slds-box slds-theme_error">
-            <p>Error loading SAP Band and Cost Savings: {errorMessage}</p>
-            <lightning-button label="Retry" onclick={handleRetry} variant="brand"></lightning-button>
-        </div>
+    <!-- Second Page: Show Saved Values -->
+    <template if:true={isSecondPage}>
+        <lightning-card>
+            <h3>Saved Values</h3>
+
+            <!-- Summary Table for Saved Values -->
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Saved Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Normal Bead</td>
+                        <td>{savedValues.Normal_Bead__c}</td>
+                    </tr>
+                    <tr>
+                        <td>Innovation Bead</td>
+                        <td>{savedValues.Innovation_Bead__c}</td>
+                    </tr>
+                    <!-- Add more fields as required -->
+                </tbody>
+            </table>
+
+            <!-- Edit Button -->
+            <div class="slds-m-top_medium slds-float_right">
+                <lightning-button label="Edit" variant="brand" onclick={handleEdit}></lightning-button>
+            </div>
+        </lightning-card>
     </template>
 
-    <template if:true={showData}>
-        <div class="slds-box slds-theme_default">
-            <p><strong>Current SAP Band:</strong> {currentSAPBand}</p>
-            <p><strong>Potential SAP Band:</strong> {potentialSAPBand}</p>
-            <p><strong>Abs Costing:</strong> {costSavings}</p>
-        </div>
+    <!-- Third Page: Edit Previous and New Values -->
+    <template if:true={isThirdPage}>
+        <lightning-card>
+            <h3>Edit Values</h3>
+
+            <!-- Table for Previous and Current Editable Values -->
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Previous Value</th>
+                        <th>Current Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Only show if Normal Bead was checked -->
+                    <template if:true={fieldVisibility.Normal_Bead__c}>
+                        <tr>
+                            <td>Normal Bead</td>
+                            <td>{previousValues.Normal_Bead__c}</td>
+                            <td>
+                                <lightning-input type="number" value={currentValues.Normal_Bead__c} onchange={handleFieldChange} data-id="Normal_Bead__c"></lightning-input>
+                            </td>
+                        </tr>
+                    </template>
+
+                    <!-- Only show if Innovation Bead was checked -->
+                    <template if:true={fieldVisibility.Innovation_Bead__c}>
+                        <tr>
+                            <td>Innovation Bead</td>
+                            <td>{previousValues.Innovation_Bead__c}</td>
+                            <td>
+                                <lightning-input type="number" value={currentValues.Innovation_Bead__c} onchange={handleFieldChange} data-id="Innovation_Bead__c"></lightning-input>
+                            </td>
+                        </tr>
+                    </template>
+
+                    <!-- Add more fields as required, with conditionals for each checkbox -->
+                </tbody>
+            </table>
+
+            <!-- Save and Cancel buttons -->
+            <div class="slds-m-top_medium">
+                <lightning-button label="Save" variant="brand" onclick={handleSaveEdit}></lightning-button>
+                <lightning-button label="Cancel" variant="neutral" onclick={handleCancelEdit}></lightning-button>
+            </div>
+        </lightning-card>
     </template>
 </template>
