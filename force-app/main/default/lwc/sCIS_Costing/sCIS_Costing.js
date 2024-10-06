@@ -5,6 +5,8 @@ import getFunders from '@salesforce/apex/SCIS_FunderCostingController.getFunders
 import saveCosting from '@salesforce/apex/FunderCostingController.saveCosting'; // Import Apex save method
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getSAPAndCostSavings from '@salesforce/apex/SAPBandCostingController.getSAPAndCostSavings';
+import getCostingRecordsByPropertyOwner from '@salesforce/apex/SCIS_CostingController.getCostingRecordsByPropertyOwner';
+
 
 
 // Fields to fetch from Survey object (Name and OwnerId)
@@ -14,7 +16,7 @@ export default class ScisFunderCosting extends LightningElement {
     @track isSaved = false; 
     @track isFinish = false;
     @track isSummary = false;
-    @api recordId2; // This holds the current Survey record ID
+    @api recordId; // This holds the current Survey record ID
     @track surveyName; // To store the Survey Name
     @track propertyOwnerId; // To store the OwnerId from Survey
 
@@ -28,7 +30,7 @@ export default class ScisFunderCosting extends LightningElement {
     @track isNormalBeadChecked = false;
     @track isInnovationBeadChecked = true; 
 
-    @api recordId; // ID of the Survey record to be passed from the parent component or page
+    //@api recordId; // ID of the Survey record to be passed from the parent component or page
     @track currentSAPBand; // To store the current SAP band
     @track potentialSAPBand; // To store the potential SAP band
     @track costSavings; // To store the cost savings
@@ -38,8 +40,12 @@ export default class ScisFunderCosting extends LightningElement {
     @track errorMessage; // To store any error message
     @api profitPercentage;
 
+    @track costingRecords; // To store the costing records
+    @track error; // To handle error state
+    @track isLoading = true; // To handle loading state
+
     // Fetch Survey details (Name and OwnerId)
-    @wire(getRecord, { recordId2: '$recordId', fields: FIELDS })
+    @wire(getRecord, { recordId: '$recordId', fields: FIELDS })
     wiredSurvey({ error, data }) {
         if (data) {
             this.surveyName = data.fields.Name.value; 
@@ -78,6 +84,8 @@ export default class ScisFunderCosting extends LightningElement {
             console.error('Error fetching costing details:', error);
         }
     }
+
+   
     
     
 
@@ -246,8 +254,11 @@ export default class ScisFunderCosting extends LightningElement {
         };
     
         // Check if we are updating or creating a new record
-        if (this.existingCostingId) {  // If an existing record Id is available, we pass it to update
-            costingData.Id = this.existingCostingId;
+        if (this.existingCostingId) {
+            costingData.Id = this.existingCostingId; // Set the Id for update
+            this.isSummary=true;
+            this.isSaved=true;
+            this.isFinish=false;
         }
     
         // Call the Apex save method
@@ -307,7 +318,7 @@ export default class ScisFunderCosting extends LightningElement {
     fetchSAPCostingData() {
         this.isLoading = true;
         this.isError = false;
-        getSAPAndCostSavings({ surveyId: this.recordId })
+        getSAPAndCostSavings({ surveyId: this.recordId})
             .then((result) => {
                 // Store the result in component variables
                 this.currentSAPBand = result.currentSAPBand || 'No Band'; // Display 'No Band' if no data
@@ -351,7 +362,25 @@ export default class ScisFunderCosting extends LightningElement {
         return this.isDataLoaded && !this.isError;
     }
 
-   
+//    summarry fields fetch here
 
+ // Fetch the Costing records based on Property_Owner__c (recordId)
+ @wire(getCostingRecordsByPropertyOwner, { propertyOwnerId: '$recordId' })
+ wiredCostingRecords({ error, data }) {
+     if (data) {
+         this.costingRecords = data;
+         this.isLoading = false;
+     } else if (error) {
+         this.error = error;
+         this.isLoading = false;
+         this.dispatchEvent(
+             new ShowToastEvent({
+                 title: 'Error loading costing records',
+                 message: error.body.message,
+                 variant: 'error',
+             })
+         );
+     }
+    }
     
 }

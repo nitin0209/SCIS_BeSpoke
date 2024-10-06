@@ -4,7 +4,7 @@
     <div class="funderDetails">
     <lightning-card >
         
-        <h1 class="custom-heading">Funder Costing Details</h1>
+        <h1 class="custom-heading" >Funder Costing Details</h1>
         <template if:true={costingDetails}>
             <div class="slds-grid slds-wrap slds-p-around_small">
                 <!-- Normal Bead -->
@@ -335,14 +335,7 @@
                 <span>{profitAmount}</span>
             </div>
 
-            <!-- Profit Percent -->
-            <!-- <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                <strong>Profit Percent:</strong>
-            </div>
-            <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                <span>{profitPercentage}%</span>
-            </div> -->
-
+           
             <!-- update percentage bar -->
 
             
@@ -388,175 +381,220 @@
 
     <!-- Display Summary if isSummary is true -->
     <template if:true={isSummary} >
+        
         <lightning-card>
-            <h3 class="custom-message">
-                Costing has already been done.
-                <br />
-                Please click on "<strong>EDIT</strong>" to continue.
-                <br />
-                Here are the values that were previously selected from the costing.
-            </h3>
+            
+                <h3 class="custom-message">
+                    Costing has already been done.
+                    <br />
+                    Please click on "<strong>EDIT1</strong>" to continue.
+                    <br />
+                    Here are the values that were previously selected from the costing.
+                </h3>
+        
+                <!-- Summary of fields -->
+                 <!-- Show loading spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
 
-            <!-- Summary of fields -->
-            <div class="slds-grid slds-wrap slds-p-around_small">
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>Normal Bead:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+        <!-- Show costing records once loaded -->
+        <template if:true={costingRecords}>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <!-- Use only record.Id as key -->
+                            <th key={record.Id}>{record.Name}</th>
+                        </template>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Cavity Guarantee</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Cavity_Guarantee__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>CIGA Search</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.CIGA_Search__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>EPC Elmhurst</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.EPC_Elmhurst__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>EPR Fee</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.EPR_fee__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>EWI</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.EWI__c}</td>
+                        </template>
+                    </tr>
+                    <!-- <tr>
+                        <th>Funder</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Funder__c}</td>
+                        </template>
+                    </tr> -->
+                    <tr>
+                        <th>Innovation Bead</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Innovation_Bead__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>Land Registry</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Land_Registry__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>Loft</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Loft__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>Loft Guarantee</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Loft_Guarantee__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>Mechanical Vents</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Mechanical_Vents__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>Normal Bead</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Normal_Bead__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>Retrofit Coordination</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Retrofit_Coodintation__c}	</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>RIR</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.RIR__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>Survey Fee</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Survey_Fee__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>Tech Survey</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Tech_Survey__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>TM Amendment</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.TM_Amendment__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>TM Lodgement</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.TM_Lodgement__c}</td>
+                        </template>
+                    </tr>
+                </tbody>
+            </table>
+        </template>
+
+        <!-- Show error if there is an error -->
+        <template if:true={error}>
+            <p class="slds-text-color_error">Error: {error.body.message}</p>
+        </template>
+
+        <!-- summary field end here -->
+
+                <div class="funderDetails">
+                <!-- Financial Summary -->
+                <div class="slds-grid slds-wrap slds-p-around_small financial-summary">
+                    <!-- Funder Average Price -->
+                    <div class="slds-col slds-size_1 slds-p-bottom_x-small">
+                        <strong>Funder average price:</strong>
+                    </div>
                     <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                        <span>{normalBeadStatus}</span>
+                        <span>{funderAveragePrice}</span>
+                    </div>
+        
+                    <!-- ABS Costing -->
+                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                        <strong>ABS Costing:</strong>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                        <span>{costSavings}</span>
+                    </div>
+        
+                    <!-- Price We Get -->
+                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                        <strong>Price We Get:</strong>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                        <span>{priceWeGet}</span>
+                    </div>
+        
+                    <!-- Total Cost -->
+                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                        <strong>Total Cost:</strong>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                        <span>{totalCost}</span>
+                    </div>
+        
+                    <!-- Profit Amount -->
+                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                        <strong>Profit Amount:</strong>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                        <span>{profitAmount}</span>
+                    </div>
+        
+                    
+                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                        <p>Profit Percent :</p>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                        <!-- Progress bar container -->
+                        <div class="progress-container">
+                            <!-- Progress bar, style dynamically applied based on percentageClass and percentageWidth -->
+                            <div class={percentageClass} style="width: {percentageWidth};">
+                                {profitPercentage} %
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>Innovation Bead:</strong>
+        
+                <!-- Edit Button (to go back to editable mode) -->
+                <div class="slds-p-around_medium slds-align_absolute-center">
+                    <lightning-button label="Edit" variant="brand" onclick={handleEdit}></lightning-button>
                 </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{costingDetails.Innovation_Bead__c}</span>
-                </div>
-
-                <!-- Repeat for other fields (RIR, Loft, etc.) -->
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>RIR:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{costingDetails.RIR__c}</span>
-                </div>
-
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>Loft:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{costingDetails.Loft__c}</span>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>Loft:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{costingDetails.Loft__c}</span>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>Mechanical Vents:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{costingDetails.Mechanical_Vents__c}</span>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>EPR Fee:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{costingDetails.EPR_fee__c}</span>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>EPC Elmhurst:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{costingDetails.EPC_Elmhurst__c}</span>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>TM Lodgement:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{costingDetails.TM_Lodgement__c}</span>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>TM Amendment:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{costingDetails.TM_Amendment__c}</span>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>Survey Fee:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{costingDetails.Survey_Fee__c}</span>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>Tech Survey:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{costingDetails.Tech_Survey__c}</span>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>Retrofit Coordination:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{costingDetails.Retrofit_Coodintation__c}</span>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>Land Registry:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{costingDetails.Land_Registry__c}</span>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>CIGA Search:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{costingDetails.CIGA_Search__c}</span>
-                </div>
-
-
-                <!-- Continue for other costing fields... -->
-
-            </div>
-
-            <!-- Financial Summary -->
-            <div class="slds-grid slds-wrap slds-p-around_small">
-                <!-- Funder Average Price -->
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>Funder average price:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{funderAveragePrice}</span>
-                </div>
-
-                <!-- ABS Costing -->
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>ABS Costing:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{costSavings}</span>
-                </div>
-
-                <!-- Price We Get -->
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>Price We Get:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{priceWeGet}</span>
-                </div>
-
-                <!-- Total Cost -->
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>Total Cost:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{totalCost}</span>
-                </div>
-
-                <!-- Profit Amount -->
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>Profit Amount:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{profitAmount}</span>
-                </div>
-
-                <!-- Profit Percent -->
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <strong>Profit Percent:</strong>
-                </div>
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <span>{profitPercentage}%</span>
-                </div>
-            </div>
-
-            <!-- Edit Button (to go back to editable mode) -->
-            <div class="slds-p-around_medium">
-                <lightning-button label="Edit" variant="brand" onclick={handleEdit}></lightning-button>
             </div>
         </lightning-card>
+        
     </template>
 
      <!-- Success message and buttons after saving -->

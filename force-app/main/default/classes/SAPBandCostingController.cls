@@ -81,7 +81,7 @@ public with sharing class SAPBandCostingController {
 
         } catch (Exception ex) {
             system.debug('Error calculating cost savings: ' + ex.getMessage());
-            throw new AuraHandledException('Error calculating cost savings: ' + ex.getMessage());
+            throw new AuraHandledException('An issue occurred while calculating cost savings. Please try again or contact support if the problem persists: ' + ex.getMessage());
         }
 
         return result;

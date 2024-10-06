@@ -1,77 +1,138 @@
 <template>
-    <lightning-card title="Costing Checkbox Example" icon-name="custom:custom14">
-        <!-- Show edit mode -->
-        <template if:true={isEditMode}>
-            <h3 class="slds-text-heading_medium">If you are updating the costing details, make sure to select all the desired values. All the selected values will be updated accordingly.</h3>
-            <div class="slds-grid slds-wrap slds-p-around_small">
-                <!-- Normal Bead Checkbox -->
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <lightning-input 
-                        type="checkbox" 
-                        label="Normal Bead" 
-                        data-field="Normal_Bead__c" 
-                        onchange={handleCheckboxChange}>
-                    </lightning-input>
-                    <span>{displayValues.Normal_Bead__c}</span>
-                </div>
-
-                <!-- RIR Checkbox -->
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <lightning-input 
-                        type="checkbox" 
-                        label="RIR" 
-                        data-field="RIR__c" 
-                        onchange={handleCheckboxChange}>
-                    </lightning-input>
-                    <span>{displayValues.RIR__c}</span>
-                </div>
-
-                <!-- Loft Checkbox -->
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <lightning-input 
-                        type="checkbox" 
-                        label="Loft" 
-                        data-field="Loft__c" 
-                        onchange={handleCheckboxChange}>
-                    </lightning-input>
-                    <span>{displayValues.Loft__c}</span>
-                </div>
-
-                <!-- Mechanical Vents Checkbox -->
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <lightning-input 
-                        type="checkbox" 
-                        label="Mechanical Vents" 
-                        data-field="Mechanical_Vents__c" 
-                        onchange={handleCheckboxChange}>
-                    </lightning-input>
-                    <div class="slds-p-top_small">
-                        <lightning-input 
-                            type="number" 
-                            label="Quantity" 
-                            value={mechanicalVentsQuantity} 
-                            onchange={handleMechanicalVentsQuantityChange}>
-                        </lightning-input>
-                    </div>
-                    <span>{displayValues.Mechanical_Vents_Cost}</span>
-                </div>
-
-                <!-- EPR Fee Checkbox -->
-                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                    <lightning-input 
-                        type="checkbox" 
-                        label="EPR Fee" 
-                        data-field="EPR_fee__c" 
-                        onchange={handleCheckboxChange}>
-                    </lightning-input>
-                    <span>{displayValues.EPR_fee__c}</span>
-                </div>
-            </div>
+    <lightning-card title="Costing Records">
+        <!-- Show loading spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
         </template>
 
-        <!-- Button to enter edit mode -->
-        <template if:false={isEditMode}>
-            <lightning-button label="Edit" variant="brand" onclick={handleEdit}></lightning-button>
+        <!-- Show costing records once loaded -->
+        <template if:true={costingRecords}>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <!-- Use only record.Id as key -->
+                            <th key={record.Id}>{record.Name}</th>
+                        </template>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Cavity Guarantee</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Cavity_Guarantee__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>CIGA Search</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.CIGA_Search__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>EPC Elmhurst</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.EPC_Elmhurst__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>EPR Fee</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.EPR_fee__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>EWI</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.EWI__c}</td>
+                        </template>
+                    </tr>
+                    <!-- <tr>
+                        <th>Funder</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Funder__c}</td>
+                        </template>
+                    </tr> -->
+                    <tr>
+                        <th>Innovation Bead</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Innovation_Bead__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>Land Registry</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Land_Registry__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>Loft</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Loft__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>Loft Guarantee</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Loft_Guarantee__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>Mechanical Vents</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Mechanical_Vents__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>Normal Bead</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Normal_Bead__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>Retrofit Coordination</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Retrofit_Coodintation__c}	</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>RIR</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.RIR__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>Survey Fee</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Survey_Fee__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>Tech Survey</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Tech_Survey__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>TM Amendment</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.TM_Amendment__c}</td>
+                        </template>
+                    </tr>
+                    <tr>
+                        <th>TM Lodgement</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.TM_Lodgement__c}</td>
+                        </template>
+                    </tr>
+                </tbody>
+            </table>
+        </template>
+
+        <!-- Show error if there is an error -->
+        <template if:true={error}>
+            <p class="slds-text-color_error">Error: {error.body.message}</p>
         </template>
     </lightning-card>
 </template>
