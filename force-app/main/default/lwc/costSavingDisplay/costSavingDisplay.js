@@ -1,81 +1,49 @@
-import { LightningElement, track, api } from 'lwc';
+import { LightningElement, api, track, wire } from 'lwc';
 
-export default class CostingComponent extends LightningElement {
-    @api recordId; // The record ID (Property Owner or other relevant ID)
-    
-    // Manage different page states
-    @track isFirstPage = true;
-    @track isSecondPage = false;
-    @track isThirdPage = false;
+export default class CostSavingDisplay extends LightningElement {
+    @api recordId;
+    @track costingDetails = {}; // Current costing details
+    @track previousCostingDetails = {}; // Previous costing details
+    @track error;
+    @track isSaved = false; // Track if the form is saved
 
-    @track fieldVisibility = {}; // Track checkbox visibility
-    @track currentValues = {}; // Store current values from inputs
-    @track savedValues = {}; // Store saved values
-    @track previousValues = {}; // Store previously saved values for editing
-    
-    // Sample values, assume this is your costing data (can come from Apex or static for now)
-    @track costingRecords = {
-        Normal_Bead__c: 0,
-        Innovation_Bead__c: 13.05,
-        RIR__c: 0,
-    };
-
-    connectedCallback() {
-        // Initially load any saved values if available
-        this.loadCostingData();
+    // Wire to get costing details, passing recordId dynamically
+    @wire({})
+    wiredCostingRecords({ error, data }) {
+        if (data) {
+            this.costingDetails = data.newCostingDetails; // Set current values
+            this.previousCostingDetails = data.previousCostingDetails; // Set previous values
+            this.isSaved = false;
+        } else if (error) {
+            this.error = error;
+        }
     }
 
-    loadCostingData() {
-        // Load costing data into current values (this could come from Apex)
-        this.currentValues = { ...this.costingRecords };
-    }
-
-    // Handle checkbox changes
+    // Handle checkbox change events and update costingDetails
     handleCheckboxChange(event) {
-        const field = event.target.dataset.id;
-        this.fieldVisibility[field] = event.target.checked; // Track if the checkbox is checked
+        const field = event.target.dataset.field; // Get field from dataset
+        this.costingDetails[field] = event.target.checked ? 1 : 0; // Update field based on checkbox state
     }
 
-    // Handle input field changes
-    handleFieldChange(event) {
-        const field = event.target.dataset.id;
-        this.currentValues[field] = event.target.value; // Update current value
-    }
-
-    // Handle Save on First Page
+    // Save action
     handleSave() {
-        // Save current values to savedValues and proceed to second page
-        this.savedValues = { ...this.currentValues };
+        // Logic for saving the data goes here
+        // E.g., calling an Apex method to save the updated costing details to Salesforce
 
-        // Switch to second page (show saved values)
-        this.isFirstPage = false;
-        this.isSecondPage = true;
+        this.isSaved = true; // Mark the form as saved
     }
 
-    // Handle Edit button on Second Page
+    // Edit action, move current values to previousCostingDetails and reset new values to zero
     handleEdit() {
-        // Store saved values into previousValues for comparison/editing
-        this.previousValues = { ...this.savedValues };
+        // Move current costingDetails to previousCostingDetails
+        this.previousCostingDetails = { ...this.costingDetails };
 
-        // Switch to third page (edit previous and new values)
-        this.isSecondPage = false;
-        this.isThirdPage = true;
-    }
+        // Reset all new values to zero
+        for (let field in this.costingDetails) {
+            this.costingDetails[field] = 0;
+        }
 
-    // Handle Save on Third Page (Edit Mode)
-    handleSaveEdit() {
-        // Save current values after editing
-        this.savedValues = { ...this.currentValues };
-
-        // Switch back to second page (summary of saved values)
-        this.isThirdPage = false;
-        this.isSecondPage = true;
-    }
-
-    // Handle Cancel on Third Page
-    handleCancelEdit() {
-        // Discard changes and revert to second page
-        this.isThirdPage = false;
-        this.isSecondPage = true;
+        // Mark as not saved to allow editing
+        this.isSaved = false;
     }
 }

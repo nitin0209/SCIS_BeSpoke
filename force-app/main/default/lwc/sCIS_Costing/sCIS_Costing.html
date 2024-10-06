@@ -4,7 +4,31 @@
     <div class="funderDetails">
     <lightning-card >
         
-        <h1 class="custom-heading" >Funder Costing Details</h1>
+        <!-- Funder Costing Details with Updated Background -->
+<div class="slds-box slds-theme_alert-texture slds-m-around_medium slds-p-around_large" 
+style="border: 2px solid #FF6F61; border-radius: 10px; background-color: #faf7f7;"> 
+<div class="slds-grid slds-grid_align-center slds-m-bottom_small">
+   <!-- Icon -->
+   <div class="slds-icon_container slds-icon-custom-custom9 slds-m-right_x-small" style="color: #FF6F61;">
+       <svg class="slds-icon slds-icon_medium" aria-hidden="true">
+           <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#moneybag"></use>
+       </svg>
+   </div>
+   <!-- Title -->
+   <h1 class="slds-text-heading_large slds-text-color_success" style="font-weight: bold; color: #83e94c;">
+       Funder Costing Details
+   </h1>
+</div>
+<!-- Content -->
+<p class="slds-text-body_regular" style="font-size: 1.4rem; text-align: center; color: #333;">
+   Manage and review your funder costing details effectively.
+</p>
+</div>
+
+        
+        
+        
+        
         <template if:true={costingDetails}>
             <div class="slds-grid slds-wrap slds-p-around_small">
                 <!-- Normal Bead -->
@@ -235,7 +259,30 @@
 </div>
     <!-- Funder List and Summary Card -->
     <lightning-card >
-        <h2 class="custom-heading1">Funder List</h2>
+
+      <!-- Funder List with Enhanced Background and Shades -->
+            <div class="slds-box slds-theme_alert-texture slds-m-around_medium slds-p-around_large" 
+            style="border: 2px solid #5DADE2; border-radius: 10px; background: linear-gradient(135deg, #EBF5FB 0%, #AED6F1 100%);"> 
+            <div class="slds-grid slds-grid_align-center slds-m-bottom_small">
+            <!-- Icon -->
+            <div class="slds-icon_container slds-icon-custom-custom63 slds-m-right_x-small" style="color: #2E86C1;">
+                <svg class="slds-icon slds-icon_medium" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#diamond"></use>
+                </svg>
+            </div>
+            <!-- Title -->
+            <h2 class="slds-text-heading_medium slds-text-color_default" style="font-size: 2rem; font-weight: bold; color: #1A5276;">
+                Funder List
+            </h2>
+            </div>
+            <!-- Content -->
+            <p class="slds-text-body_regular" style="font-size: 1.2rem; text-align: center; color: #34495E;">
+            Here you can review the list of available funders.
+            </p>
+            </div>
+
+
+        
         <template if:true={funders.length}>
             <table class="slds-table slds-table_bordered slds-table_cell-buffer">
                 <thead>
@@ -268,7 +315,21 @@
         </template>
 
         <!-- Funder Details Section -->
-         <div class="funderDetails">
+            <div class="slds-box slds-theme_alert-texture slds-m-around_medium slds-p-around_small" 
+                    style="border: 2px solid #58D68D; border-radius: 10px; background: linear-gradient(135deg, #E8F8F5 0%, #58D68D 100%);"> 
+                <h3 class="slds-text-heading_medium slds-text-color_success slds-text-align_center" 
+                    style="font-size: 2rem; font-weight: bold; color: #1D8348;">
+                    <span class="slds-icon_container slds-icon-custom-custom63 slds-m-right_x-small" title="Calculation">
+                        <svg class="slds-icon slds-icon_medium" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#calculator"></use>
+                        </svg>
+                    </span>
+                    Costing and Profit Breakdown
+                </h3>
+            </div>
+
+
+            <div class="funderDetails">
         <div class="slds-grid slds-wrap slds-p-around_small">
             <!-- Funder Average Price -->
             <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
@@ -364,12 +425,11 @@
 
         <!-- Save and Previous Buttons -->
          <div class="funderButton">
-         <lightning-card>
-        <div class="slds-col slds-size_1-of-1 slds-p-top_medium slds-float_left">
-            <!-- <lightning-button label="Previous" onclick={handlePrevious}></lightning-button> &nbsp; &nbsp; -->
-            <lightning-button label="Save" variant="brand" onclick={handleSave}></lightning-button>
-        </div>
-    </lightning-card>
+            <lightning-card class="slds-p-around_medium slds-m-around_medium" style="background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); border-radius: 12px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);">
+                <div class="slds-grid slds-grid_align-end">
+                    <lightning-button label="SAVE" variant="brand" style="font-size: 1.3rem; padding: 1rem 2.5rem; background-color: white; color: #a6c1ee; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);" onclick={handleSave}></lightning-button>
+                </div>
+            </lightning-card>
 </div>
 
         
@@ -384,13 +444,28 @@
         
         <lightning-card>
             
-                <h3 class="custom-message">
-                    Costing has already been done.
-                    <br />
-                    Please click on "<strong>EDIT2</strong>" to continue.
+            <div class="slds-box slds-theme_alert-texture slds-m-around_medium slds-p-around_large" style="border: 2px solid #4BCA81; border-radius: 10px; background-color: #f4f6f9;">
+                <div class="slds-grid slds-grid_align-center slds-m-bottom_small">
+                    <!-- Icon -->
+                    <div class="slds-icon_container slds-icon-custom-custom54 slds-m-right_x-small" style="color: #4BCA81;">
+                        <svg class="slds-icon slds-icon_medium" aria-hidden="true">
+                            <use xlink:href="/assets/icons/custom-sprite/svg/symbols.svg#custom54"></use>
+                        </svg>
+                    </div>
+                    <!-- Title -->
+                    <h3 class="slds-text-heading_large slds-text-color_success" style="font-weight: bold;">
+                        Costing has already been done
+                    </h3>
+                </div>
+                <!-- Content -->
+                <p class="slds-text-body_regular" style="font-size: 1.4rem; text-align: center; color: #333;">
+                    Please click on "<strong>EDIT</strong>" to continue.
                     <br />
                     Here are the values that were previously selected from the costing.
-                </h3>
+                </p>
+            </div>
+            
+            
         
                 <!-- Summary of fields -->
                  <!-- Show loading spinner -->
@@ -414,81 +489,15 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <th>Cavity Guarantee</th>
-                        <template for:each={costingRecords} for:item="record">
-                            <td key={record.Id}>{record.Cavity_Guarantee__c}</td>
-                        </template>
-                    </tr>
-                    <tr>
-                        <th>CIGA Search</th>
-                        <template for:each={costingRecords} for:item="record">
-                            <td key={record.Id}>{record.CIGA_Search__c}</td>
-                        </template>
-                    </tr>
-                    <tr>
-                        <th>EPC Elmhurst</th>
-                        <template for:each={costingRecords} for:item="record">
-                            <td key={record.Id}>{record.EPC_Elmhurst__c}</td>
-                        </template>
-                    </tr>
-                    <tr>
-                        <th>EPR Fee</th>
-                        <template for:each={costingRecords} for:item="record">
-                            <td key={record.Id}>{record.EPR_fee__c}</td>
-                        </template>
-                    </tr>
-                    <tr>
-                        <th>EWI</th>
-                        <template for:each={costingRecords} for:item="record">
-                            <td key={record.Id}>{record.EWI__c}</td>
-                        </template>
-                    </tr>
-                    <!-- <tr>
-                        <th>Funder</th>
-                        <template for:each={costingRecords} for:item="record">
-                            <td key={record.Id}>{record.Funder__c}</td>
-                        </template>
-                    </tr> -->
-                    <tr>
-                        <th>Innovation Bead</th>
-                        <template for:each={costingRecords} for:item="record">
-                            <td key={record.Id}>{record.Innovation_Bead__c}</td>
-                        </template>
-                    </tr>
-                    <tr>
-                        <th>Land Registry</th>
-                        <template for:each={costingRecords} for:item="record">
-                            <td key={record.Id}>{record.Land_Registry__c}</td>
-                        </template>
-                    </tr>
-                    <tr>
-                        <th>Loft</th>
-                        <template for:each={costingRecords} for:item="record">
-                            <td key={record.Id}>{record.Loft__c}</td>
-                        </template>
-                    </tr>
-                    <tr>
-                        <th>Loft Guarantee</th>
-                        <template for:each={costingRecords} for:item="record">
-                            <td key={record.Id}>{record.Loft_Guarantee__c}</td>
-                        </template>
-                    </tr>
-                    <tr>
-                        <th>Mechanical Vents</th>
-                        <template for:each={costingRecords} for:item="record">
-                            <td key={record.Id}>{record.Mechanical_Vents__c}</td>
-                        </template>
-                    </tr>
-                    <tr>
                         <th>Normal Bead</th>
                         <template for:each={costingRecords} for:item="record">
                             <td key={record.Id}>{record.Normal_Bead__c}</td>
                         </template>
                     </tr>
                     <tr>
-                        <th>Retrofit Coordination</th>
+                        <th>Innovation Bead</th>
                         <template for:each={costingRecords} for:item="record">
-                            <td key={record.Id}>{record.Retrofit_Coodintation__c}	</td>
+                            <td key={record.Id}>{record.Innovation_Bead__c}</td>
                         </template>
                     </tr>
                     <tr>
@@ -497,6 +506,50 @@
                             <td key={record.Id}>{record.RIR__c}</td>
                         </template>
                     </tr>
+
+                    <tr>
+                        <th>Loft</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Loft__c}</td>
+                        </template>
+                    </tr>
+
+                    <tr>
+                        <th>Mechanical Vents</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Mechanical_Vents__c}</td>
+                        </template>
+                    </tr>
+
+                    <tr>
+                        <th>EPR Fee</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.EPR_fee__c}</td>
+                        </template>
+                    </tr>
+
+                    <tr>
+                        <th>EPC Elmhurst</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.EPC_Elmhurst__c}</td>
+                        </template>
+                    </tr>
+
+                    <tr>
+                        <th>TM Lodgement</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.TM_Lodgement__c}</td>
+                        </template>
+                    </tr>
+
+                    
+                    <tr>
+                        <th>TM Amendment</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.TM_Amendment__c}</td>
+                        </template>
+                    </tr>
+
                     <tr>
                         <th>Survey Fee</th>
                         <template for:each={costingRecords} for:item="record">
@@ -509,18 +562,55 @@
                             <td key={record.Id}>{record.Tech_Survey__c}</td>
                         </template>
                     </tr>
+
                     <tr>
-                        <th>TM Amendment</th>
+                        <th>Retrofit Coordination</th>
                         <template for:each={costingRecords} for:item="record">
-                            <td key={record.Id}>{record.TM_Amendment__c}</td>
+                            <td key={record.Id}>{record.Retrofit_Coodintation__c}	</td>
                         </template>
                     </tr>
+                    
                     <tr>
-                        <th>TM Lodgement</th>
+                        <th>Land Registry</th>
                         <template for:each={costingRecords} for:item="record">
-                            <td key={record.Id}>{record.TM_Lodgement__c}</td>
+                            <td key={record.Id}>{record.Land_Registry__c}</td>
                         </template>
                     </tr>
+
+                    <tr>
+                        <th>CIGA Search</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.CIGA_Search__c}</td>
+                        </template>
+                    </tr>
+
+                        <!-- Remaining -->
+                    <!-- <tr>
+                        <th>Cavity Guarantee</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Cavity_Guarantee__c}</td>
+                        </template>
+                    </tr>
+                    
+                    
+                    <tr>
+                        <th>EWI</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.EWI__c}</td>
+                        </template>
+                    </tr>
+                    
+                    <tr>
+                        <th>Loft Guarantee</th>
+                        <template for:each={costingRecords} for:item="record">
+                            <td key={record.Id}>{record.Loft_Guarantee__c}</td>
+                        </template>
+                    </tr> -->
+                    
+                    
+                   
+                   
+                   
                 </tbody>
             </table>
         </div>
@@ -532,7 +622,19 @@
         </template>
 
         <!-- summary field end here -->
-
+                <div class="slds-box slds-theme_alert-texture slds-m-around_medium slds-p-around_small" 
+                        style="border: 2px solid #58D68D; border-radius: 10px; background: linear-gradient(135deg, #E8F8F5 0%, #58D68D 100%);"> 
+                    <h3 class="slds-text-heading_medium slds-text-color_success slds-text-align_center" 
+                        style="font-size: 2rem; font-weight: bold; color: #1D8348;">
+                        <span class="slds-icon_container slds-icon-custom-custom63 slds-m-right_x-small" title="Calculation">
+                            <svg class="slds-icon slds-icon_medium" aria-hidden="true">
+                                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#calculator"></use>
+                            </svg>
+                        </span>
+                        Costing and Profit Breakdown
+                    </h3>
+                </div>
+                
                 <div class="funderDetails">
                 <!-- Financial Summary -->
                 <div class="slds-grid slds-wrap slds-p-around_small financial-summary">
@@ -592,9 +694,10 @@
                 </div>
         
                 <!-- Edit Button (to go back to editable mode) -->
-                <div class="slds-grid slds-grid_align-end slds-m-bottom_medium">
-                    <lightning-button label="EDIT1" variant="brand" onclick={handleEdit}></lightning-button>
+                <div class="slds-box slds-theme_default slds-p-around_medium slds-m-around_medium slds-text-align_right">
+                    <lightning-button label="EDIT" variant="brand" class="slds-button_brand slds-m-right_medium" onclick={handleEdit}></lightning-button> 
                 </div>
+                
                 
             </div>
         </lightning-card>
@@ -604,13 +707,27 @@
      <!-- Success message and buttons after saving -->
     <template if:true={isFinish}>
         <lightning-card>
-            <h2 class="custom-heading">Costing saved successfully.</h2>
-            <div class="slds-p-around_medium">
-                <!-- Finish Button (only displayed when saving is completed) -->
-                <div class="funderButton">
-                    <lightning-button label="FINISH" variant="brand" onclick={handleFinish}></lightning-button>
+            <div class="slds-box slds-m-around_medium slds-p-around_medium" style="background: linear-gradient(135deg, #f79d00 0%, #64f38c 100%); border-radius: 12px; padding: 2.5rem; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);">
+                <h2 class="slds-text-heading_medium slds-text-align_center" style="color: white; font-weight: bold; font-size: 2.4rem; margin-bottom: 1.5rem;">
+                    <svg class="slds-icon slds-icon_medium" aria-hidden="true" style="vertical-align: middle; margin-right: 0.5rem;">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check"></use>
+                    </svg>
+                    Costing Saved Successfully!
+                </h2>
+                <p class="slds-text-body_regular slds-text-align_center" style="color: #f1f1f1; font-size: 1.5rem;">
+                    Your costing details have been saved. Click "Finish" to proceed.
+                </p>
+            
+                <div class="slds-grid slds-wrap slds-align_absolute-center slds-p-around_medium">
+                    <lightning-button label="FINISH" variant="brand" style="background-color: linear-gradient(135deg, #f79d00 0%, #64f38c 100%); font-size: 1.3rem; padding: 1rem 3rem; border-radius: 10px;" onclick={handleFinish}></lightning-button>
                 </div>
             </div>
+            
+            
+            
+            
+            
+            
         </lightning-card>
     </template>
 
@@ -623,16 +740,25 @@
         <lightning-card >
             
             <!-- <h1 class="custom-heading" >Funder Costing Details</h1> -->
-            <div class="slds-box slds-theme_default slds-m-around_medium slds-p-around_medium">
-                <h3 class="slds-text-heading_large slds-text-align_center slds-text-color_success slds-p-bottom_medium">
-                    If you are updating the costing details, make sure to select all the desired values. All the selected values will be updated accordingly.
+            <div class="slds-box slds-m-around_medium slds-p-around_medium" style="border: 2px solid #28a745; border-radius: 15px; background: linear-gradient(135deg, #e0f7fa 30%, #a7ffeb 100%); box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+                <h3 class="slds-text-heading_medium slds-text-align_center" style="font-weight: bold; color: #00695c; margin-bottom: 1.5rem;">
+                    <svg class="slds-icon slds-icon_medium" aria-hidden="true" style="vertical-align: middle; margin-right: 0.5rem;">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#diamond"></use>
+                    </svg>
+                    Important Costing Update
                 </h3>
+                <p class="slds-text-body_regular slds-text-align_center" style="font-size: 1.2rem; color: #004d40;">
+                    If you are updating the costing details, make sure to select all the desired values.
+                    <br />
+                    All the selected values will be updated accordingly.
+                </p>
             </div>
+            
             
             <template if:true={costingDetails}>
                 <div class="slds-grid slds-wrap slds-p-around_small">
                     <!-- Normal Bead -->
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <lightning-input 
                             type="checkbox" 
                             label="Normal Bead" 
@@ -640,7 +766,12 @@
                             onchange={handleNormalBeadChange}>
                         </lightning-input>
                     </div>
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
+                        <template if:true={fieldVisibility.Normal_Bead__c}>
+                            <span class="field-value">{costingDetails.Normal_Bead__c}</span>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <template if:true={fieldVisibility.Normal_Bead__c}>
                             <span class="field-value">{costingDetails.Normal_Bead__c}</span>
                         </template>
@@ -648,7 +779,7 @@
     
                     <!-- Innovation Bead Checkbox, Hide when Normal Bead is checked -->
                     <template if:false={isNormalBeadChecked}>
-                        <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                        <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                             <lightning-input 
                                 type="checkbox" 
                                 label="Innovation Bead" 
@@ -657,15 +788,21 @@
                 onchange={handleInnovationBeadChange}>
                             </lightning-input>
                         </div>
-                        <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                        <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                             <template if:true={fieldVisibility.Innovation_Bead__c}>
                                 <span class="field-value">{costingDetails.Innovation_Bead__c}</span>
                             </template>
                         </div>
+                        <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
+                            <template if:true={fieldVisibility.Innovation_Bead__c}>
+                                <span class="field-value">{costingDetails.Innovation_Bead__c}</span>
+                            </template>
+                        </div>
+                       
                     </template>
     
                     <!-- RIR -->
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <lightning-input 
                             type="checkbox" 
                             label="RIR" 
@@ -673,14 +810,19 @@
                             onchange={handleCheckboxChange}>
                         </lightning-input>
                     </div>
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
+                        <template if:true={fieldVisibility.RIR__c}>
+                            <span class="field-value">{costingDetails.RIR__c}</span>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <template if:true={fieldVisibility.RIR__c}>
                             <span class="field-value">{costingDetails.RIR__c}</span>
                         </template>
                     </div>
     
                     <!-- Loft -->
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <lightning-input 
                             type="checkbox" 
                             label="Loft" 
@@ -688,14 +830,19 @@
                             onchange={handleCheckboxChange}>
                         </lightning-input>
                     </div>
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
+                        <template if:true={fieldVisibility.Loft__c}>
+                            <span class="field-value">{costingDetails.Loft__c}</span>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <template if:true={fieldVisibility.Loft__c}>
                             <span class="field-value">{costingDetails.Loft__c}</span>
                         </template>
                     </div>
     
                     <!-- Mechanical Vents -->
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <lightning-input 
                             type="checkbox" 
                             label="Mechanical Vents" 
@@ -703,7 +850,18 @@
                             onchange={handleMechanicalVentsChange}>
                         </lightning-input>
                     </div>
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
+                        <template if:true={fieldVisibility.Mechanical_Vents__c}>
+                            <lightning-input 
+                                type="number" 
+                                label="Mechanical Vents Quantity" 
+                                value={mechanicalVents} 
+                                onchange={handleMechanicalVentsValueChange}>
+                            </lightning-input>
+                            <strong>Mechanical Vents Cost: {totalMechanicalVentsCost}</strong>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <template if:true={fieldVisibility.Mechanical_Vents__c}>
                             <lightning-input 
                                 type="number" 
@@ -716,7 +874,7 @@
                     </div>
     
                     <!-- EPR Fee -->
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <lightning-input 
                             type="checkbox" 
                             label="EPR Fee" 
@@ -724,14 +882,19 @@
                             onchange={handleCheckboxChange}>
                         </lightning-input>
                     </div>
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
+                        <template if:true={fieldVisibility.EPR_fee__c}>
+                            <span class="field-value">{costingDetails.EPR_fee__c}</span>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <template if:true={fieldVisibility.EPR_fee__c}>
                             <span class="field-value">{costingDetails.EPR_fee__c}</span>
                         </template>
                     </div>
     
                     <!-- EPC Elmhurst -->
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <lightning-input 
                             type="checkbox" 
                             label="EPC Elmhurst" 
@@ -739,14 +902,19 @@
                             onchange={handleCheckboxChange}>
                         </lightning-input>
                     </div>
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
+                        <template if:true={fieldVisibility.EPC_Elmhurst__c}>
+                            <span class="field-value">{costingDetails.EPC_Elmhurst__c}</span>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <template if:true={fieldVisibility.EPC_Elmhurst__c}>
                             <span class="field-value">{costingDetails.EPC_Elmhurst__c}</span>
                         </template>
                     </div>
     
                     <!-- TM Lodgement -->
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <lightning-input 
                             type="checkbox" 
                             label="TM Lodgement" 
@@ -754,14 +922,19 @@
                             onchange={handleCheckboxChange}>
                         </lightning-input>
                     </div>
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
+                        <template if:true={fieldVisibility.TM_Lodgement__c}>
+                            <span class="field-value">{costingDetails.TM_Lodgement__c}</span>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <template if:true={fieldVisibility.TM_Lodgement__c}>
                             <span class="field-value">{costingDetails.TM_Lodgement__c}</span>
                         </template>
                     </div>
     
                     <!-- TM Amendment -->
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <lightning-input 
                             type="checkbox" 
                             label="TM Amendment" 
@@ -769,14 +942,19 @@
                             onchange={handleCheckboxChange}>
                         </lightning-input>
                     </div>
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
+                        <template if:true={fieldVisibility.TM_Amendment__c}>
+                            <span class="field-value">{costingDetails.TM_Amendment__c}</span>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <template if:true={fieldVisibility.TM_Amendment__c}>
                             <span class="field-value">{costingDetails.TM_Amendment__c}</span>
                         </template>
                     </div>
     
                     <!-- Survey Fee -->
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <lightning-input 
                             type="checkbox" 
                             label="Survey Fee" 
@@ -784,14 +962,19 @@
                             onchange={handleCheckboxChange}>
                         </lightning-input>
                     </div>
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
+                        <template if:true={fieldVisibility.Survey_Fee__c}>
+                            <span class="field-value">{costingDetails.Survey_Fee__c}</span>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <template if:true={fieldVisibility.Survey_Fee__c}>
                             <span class="field-value">{costingDetails.Survey_Fee__c}</span>
                         </template>
                     </div>
     
                     <!-- Tech Survey -->
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <lightning-input 
                             type="checkbox" 
                             label="Tech Survey" 
@@ -799,14 +982,20 @@
                             onchange={handleCheckboxChange}>
                         </lightning-input>
                     </div>
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
+                        <template if:true={fieldVisibility.Tech_Survey__c}>
+                            <span class="field-value">{costingDetails.Tech_Survey__c}</span>
+                        </template>
+                    </div>
+    
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <template if:true={fieldVisibility.Tech_Survey__c}>
                             <span class="field-value">{costingDetails.Tech_Survey__c}</span>
                         </template>
                     </div>
     
                     <!-- Retrofit Coordination -->
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <lightning-input 
                             type="checkbox" 
                             label="Retrofit Coordination" 
@@ -814,14 +1003,19 @@
                             onchange={handleCheckboxChange}>
                         </lightning-input>
                     </div>
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
+                        <template if:true={fieldVisibility.Retrofit_Coodintation__c}>
+                            <span class="field-value">{costingDetails.Retrofit_Coodintation__c}</span>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <template if:true={fieldVisibility.Retrofit_Coodintation__c}>
                             <span class="field-value">{costingDetails.Retrofit_Coodintation__c}</span>
                         </template>
                     </div>
     
                     <!-- Land Registry -->
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <lightning-input 
                             type="checkbox" 
                             label="Land Registry" 
@@ -829,14 +1023,19 @@
                             onchange={handleCheckboxChange}>
                         </lightning-input>
                     </div>
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
+                        <template if:true={fieldVisibility.Land_Registry__c}>
+                            <span class="field-value">{costingDetails.Land_Registry__c}</span>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <template if:true={fieldVisibility.Land_Registry__c}>
                             <span class="field-value">{costingDetails.Land_Registry__c}</span>
                         </template>
                     </div>
     
                     <!-- CIGA Search -->
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
                         <lightning-input 
                             type="checkbox" 
                             label="CIGA Search" 
@@ -844,12 +1043,18 @@
                             onchange={handleCheckboxChange}>
                         </lightning-input>
                     </div>
-                    <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
-                        <template if:true={fieldVisibility.CIGA_Search__c}>
-                            <span class="field-value">{costingDetails.CIGA_Search__c}</span>
-                        </template>
-                    </div>
-                </div> 
+                
+                <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
+                    <template if:true={fieldVisibility.CIGA_Search__c}>
+                        <span class="field-value">{costingDetails.CIGA_Search__c}</span>
+                    </template>
+                </div>
+                <div class="slds-col slds-size_1-of-3 slds-p-bottom_x-small">
+                    <template if:true={fieldVisibility.CIGA_Search__c}>
+                        <span class="field-value">{costingDetails.CIGA_Search__c}</span>
+                    </template>
+                </div>
+            </div> 
             </template>
     
             <template if:true={error}>
@@ -859,7 +1064,28 @@
     </div>
         <!-- Funder List and Summary Card -->
         <lightning-card >
-            <h2 class="custom-heading1">Funder List</h2>
+           
+            <div class="slds-box slds-theme_alert-texture slds-m-around_medium slds-p-around_large" 
+            style="border: 2px solid #5DADE2; border-radius: 10px; background: linear-gradient(135deg, #EBF5FB 0%, #AED6F1 100%);"> 
+            <div class="slds-grid slds-grid_align-center slds-m-bottom_small">
+            <!-- Icon -->
+            <div class="slds-icon_container slds-icon-custom-custom63 slds-m-right_x-small" style="color: #2E86C1;">
+                <svg class="slds-icon slds-icon_medium" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#diamond"></use>
+                </svg>
+            </div>
+            <!-- Title -->
+            <h2 class="slds-text-heading_medium slds-text-color_default" style="font-size: 2rem; font-weight: bold; color: #1A5276;">
+                Funder List
+            </h2>
+            </div>
+            <!-- Content -->
+            <p class="slds-text-body_regular" style="font-size: 1.2rem; text-align: center; color: #34495E;">
+            Here you can review the list of available funders.
+            </p>
+            </div>
+
+
             <template if:true={funders.length}>
                 <table class="slds-table slds-table_bordered slds-table_cell-buffer">
                     <thead>
@@ -892,6 +1118,21 @@
             </template>
     
             <!-- Funder Details Section -->
+
+            <div class="slds-box slds-theme_alert-texture slds-m-around_medium slds-p-around_small" 
+                    style="border: 2px solid #58D68D; border-radius: 10px; background: linear-gradient(135deg, #E8F8F5 0%, #58D68D 100%);"> 
+                <h3 class="slds-text-heading_medium slds-text-color_success slds-text-align_center" 
+                    style="font-size: 2rem; font-weight: bold; color: #1D8348;">
+                    <span class="slds-icon_container slds-icon-custom-custom63 slds-m-right_x-small" title="Calculation">
+                        <svg class="slds-icon slds-icon_medium" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#calculator"></use>
+                        </svg>
+                    </span>
+                    Costing and Profit Breakdown
+                </h3>
+            </div>
+
+
              <div class="funderDetails">
             <div class="slds-grid slds-wrap slds-p-around_small">
                 <!-- Funder Average Price -->
@@ -988,12 +1229,12 @@
     
             <!-- Save and Previous Buttons -->
              <div class="funderButton">
-             <lightning-card>
-            <div class="slds-col slds-size_1-of-1 slds-p-top_medium slds-float_left">
-                <!-- <lightning-button label="Previous" onclick={handlePrevious}></lightning-button> &nbsp; &nbsp; -->
-                <lightning-button label="Save" variant="brand" onclick={handleSave}></lightning-button>
-            </div>
-        </lightning-card>
+                <lightning-card class="slds-p-around_medium slds-m-around_medium" style="background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); border-radius: 12px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);">
+                    <div class="slds-grid slds-grid_align-end">
+                        <lightning-button label="SAVE" variant="brand" style="font-size: 1.3rem; padding: 1rem 2.5rem; background-color: white; color: #a6c1ee; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);" onclick={handleSave}></lightning-button>
+                    </div>
+                </lightning-card>
+                
     </div>
     
             

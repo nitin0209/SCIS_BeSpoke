@@ -163,40 +163,9 @@ hr {
 
 /* funder button css */
 
-.funderButton {
-    display: flex;
-    justify-content: flex-end; /* Align the buttons to the right */
-    padding: 1rem; /* Add some padding around the buttons */
-    background-color: #fff; /* Subtle background color to make it stand out */
-    border-top: 1px solid #d8dde6; /* A light border at the top to separate it from the content above */
-}
 
-.funderButton .slds-col {
-    display: flex;
-    gap: 1rem; /* Add space between the buttons */
-    align-items: center; /* Align buttons vertically */
-}
 
-.funderButton lightning-button {
-    font-size: 1rem; /* Adjust font size to make it consistent */
-    padding: 0.5rem 1.5rem; /* Make the buttons more clickable by increasing padding */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a slight shadow for a button lift effect */
-}
 
-.funderButton lightning-button.variant-brand {
-    background-color: #0176d3; /* Brand color for the 'Save' button */
-    color: white; /* Ensure the text is white for contrast */
-    border-radius: 0.25rem; /* Rounded corners for a modern look */
-}
-
-.funderButton lightning-button:hover {
-    background-color: #d6e9e5; /* Darker blue on hover for 'Save' button */
-}
-
-.funderButton lightning-button:first-child:hover {
-    background-color: #f4f4f4; /* Light gray on hover for the 'Previous' button */
-    color: #333; /* Darker text on hover */
-}
 
 .custom-message {
     color: #ef8d77; /* Orange/red color */

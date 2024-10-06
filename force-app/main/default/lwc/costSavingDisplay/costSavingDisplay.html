@@ -1,109 +1,67 @@
 <template>
-    <!-- First Page: Checkbox and Editable Input -->
-    <template if:true={isFirstPage}>
-        <lightning-card>
-            <h3>Select and Input Values</h3>
-            
-            <!-- Checkbox for Normal Bead -->
-            <lightning-input type="checkbox" label="Normal Bead" checked={fieldVisibility.Normal_Bead__c} onchange={handleCheckboxChange} data-id="Normal_Bead__c"></lightning-input>
-            <template if:true={fieldVisibility.Normal_Bead__c}>
-                <lightning-input type="number" label="Normal Bead Value" value={currentValues.Normal_Bead__c} onchange={handleFieldChange} data-id="Normal_Bead__c"></lightning-input>
-            </template>
+    <!-- Show content if isSaved is false -->
+    <template if:false={isSaved}>
+        <!-- Card for Funder Costing Details -->
+        <div class="funderDetails">
+            <lightning-card>
+                <h1 class="custom-heading">Funder Costing Details</h1>
 
-            <!-- Checkbox for Innovation Bead -->
-            <lightning-input type="checkbox" label="Innovation Bead" checked={fieldVisibility.Innovation_Bead__c} onchange={handleCheckboxChange} data-id="Innovation_Bead__c"></lightning-input>
-            <template if:true={fieldVisibility.Innovation_Bead__c}>
-                <lightning-input type="number" label="Innovation Bead Value" value={currentValues.Innovation_Bead__c} onchange={handleFieldChange} data-id="Innovation_Bead__c"></lightning-input>
-            </template>
+                <template if:true={costingDetails}>
+                    <div class="slds-grid slds-wrap slds-p-around_small">
+                        <!-- Normal Bead -->
+                        <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                            <lightning-input 
+                                type="checkbox" 
+                                label="Normal Bead" 
+                                data-field="Normal_Bead__c" 
+                                onchange={handleCheckboxChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-4 slds-p-bottom_x-small">
+                            <span class="field-value">Previous: {previousCostingDetails.Normal_Bead__c}</span>
+                        </div>
+                        <div class="slds-col slds-size_1-of-4 slds-p-bottom_x-small">
+                            <span class="field-value">New: {costingDetails.Normal_Bead__c}</span>
+                        </div>
 
-            <!-- Add more checkboxes and inputs as required -->
+                        <!-- Repeat for other fields like RIR, Loft, etc. -->
+                        <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                            <lightning-input 
+                                type="checkbox" 
+                                label="RIR" 
+                                data-field="RIR__c" 
+                                onchange={handleCheckboxChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-4 slds-p-bottom_x-small">
+                            <span class="field-value">Previous: {previousCostingDetails.RIR__c}</span>
+                        </div>
+                        <div class="slds-col slds-size_1-of-4 slds-p-bottom_x-small">
+                            <span class="field-value">New: {costingDetails.RIR__c}</span>
+                        </div>
 
-            <!-- Save Button -->
-            <div class="slds-m-top_medium">
-                <lightning-button label="Save" variant="brand" onclick={handleSave}></lightning-button>
-            </div>
-        </lightning-card>
+                        <!-- Add similar for other fields... -->
+
+                    </div>
+                </template>
+
+                <template if:true={error}>
+                    <p>Error loading Funder Costing Details</p>
+                </template>
+                
+                <!-- Save Button -->
+                <div class="slds-col slds-size_1-of-1 slds-p-top_medium slds-float_left">
+                    <lightning-button label="Save" variant="brand" onclick={handleSave}></lightning-button>
+                </div>
+            </lightning-card>
+        </div>
     </template>
 
-    <!-- Second Page: Show Saved Values -->
-    <template if:true={isSecondPage}>
+    <!-- Display content if isSaved is true -->
+    <template if:true={isSaved}>
         <lightning-card>
-            <h3>Saved Values</h3>
-
-            <!-- Summary Table for Saved Values -->
-            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
-                <thead>
-                    <tr>
-                        <th>Field</th>
-                        <th>Saved Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Normal Bead</td>
-                        <td>{savedValues.Normal_Bead__c}</td>
-                    </tr>
-                    <tr>
-                        <td>Innovation Bead</td>
-                        <td>{savedValues.Innovation_Bead__c}</td>
-                    </tr>
-                    <!-- Add more fields as required -->
-                </tbody>
-            </table>
-
-            <!-- Edit Button -->
-            <div class="slds-m-top_medium slds-float_right">
-                <lightning-button label="Edit" variant="brand" onclick={handleEdit}></lightning-button>
-            </div>
-        </lightning-card>
-    </template>
-
-    <!-- Third Page: Edit Previous and New Values -->
-    <template if:true={isThirdPage}>
-        <lightning-card>
-            <h3>Edit Values</h3>
-
-            <!-- Table for Previous and Current Editable Values -->
-            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
-                <thead>
-                    <tr>
-                        <th>Field</th>
-                        <th>Previous Value</th>
-                        <th>Current Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Only show if Normal Bead was checked -->
-                    <template if:true={fieldVisibility.Normal_Bead__c}>
-                        <tr>
-                            <td>Normal Bead</td>
-                            <td>{previousValues.Normal_Bead__c}</td>
-                            <td>
-                                <lightning-input type="number" value={currentValues.Normal_Bead__c} onchange={handleFieldChange} data-id="Normal_Bead__c"></lightning-input>
-                            </td>
-                        </tr>
-                    </template>
-
-                    <!-- Only show if Innovation Bead was checked -->
-                    <template if:true={fieldVisibility.Innovation_Bead__c}>
-                        <tr>
-                            <td>Innovation Bead</td>
-                            <td>{previousValues.Innovation_Bead__c}</td>
-                            <td>
-                                <lightning-input type="number" value={currentValues.Innovation_Bead__c} onchange={handleFieldChange} data-id="Innovation_Bead__c"></lightning-input>
-                            </td>
-                        </tr>
-                    </template>
-
-                    <!-- Add more fields as required, with conditionals for each checkbox -->
-                </tbody>
-            </table>
-
-            <!-- Save and Cancel buttons -->
-            <div class="slds-m-top_medium">
-                <lightning-button label="Save" variant="brand" onclick={handleSaveEdit}></lightning-button>
-                <lightning-button label="Cancel" variant="neutral" onclick={handleCancelEdit}></lightning-button>
-            </div>
+            <h1>Your data has been saved.</h1>
+            <lightning-button label="Edit" onclick={handleEdit}></lightning-button>
         </lightning-card>
     </template>
 </template>
