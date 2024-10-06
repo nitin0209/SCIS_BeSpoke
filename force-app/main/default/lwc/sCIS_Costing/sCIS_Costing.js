@@ -47,6 +47,8 @@ export default class ScisFunderCosting extends LightningElement {
     @track isLoading = true; // To handle loading state
     wiredCostingResult; // To store the result of the wire service
     refreshIntervalId; // To store the interval ID for auto-refresh
+    
+    @track previousValues = {};
 
 
     // Fetch the data when the component is initialized
@@ -277,6 +279,7 @@ export default class ScisFunderCosting extends LightningElement {
                 this.isSaved = true;
                 this.isSummary = false;
                 this.isFinish = true;
+                this.isPrevious =false;
                 window.scrollTo(0, 0);
                 this.dispatchEvent(new ShowToastEvent({
                     title: 'Success',
@@ -312,6 +315,7 @@ export default class ScisFunderCosting extends LightningElement {
         this.isSaved = true;
         this.isFinish = false;
         this.isSummary= true;
+        this.isPrevious = false;
     }
    
     
@@ -319,7 +323,8 @@ export default class ScisFunderCosting extends LightningElement {
     handleEdit(){
         this.isFinish = false;
         this.isSummary= false;  
-        this.isSaved = false;
+        this.isSaved = true;
+        this.isPrevious=true;
         window.scrollTo(0, 0);
     }
 
