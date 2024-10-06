@@ -397,9 +397,11 @@
         <template if:true={isLoading}>
             <lightning-spinner alternative-text="Loading"></lightning-spinner>
         </template>
-
+        <lightning-button class ="slds-float_right " label="Refresh" onclick={refreshCostingData}></lightning-button>
+        <br><br>
         <!-- Show costing records once loaded -->
         <template if:true={costingRecords}>
+            <div class="slds-grid slds-align_absolute-center slds-m-around_medium">
             <table class="slds-table slds-table_cell-buffer slds-table_bordered">
                 <thead>
                     <tr>
@@ -521,6 +523,7 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
         </template>
 
         <!-- Show error if there is an error -->
@@ -589,7 +592,7 @@
                 </div>
         
                 <!-- Edit Button (to go back to editable mode) -->
-                <div class="slds-p-around_medium slds-align_absolute-center">
+                <div class ="slds-float_right">
                     <lightning-button label="Edit" variant="brand" onclick={handleEdit}></lightning-button>
                 </div>
             </div>

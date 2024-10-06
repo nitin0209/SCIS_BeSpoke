@@ -6,6 +6,8 @@ import saveCosting from '@salesforce/apex/FunderCostingController.saveCosting'; 
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getSAPAndCostSavings from '@salesforce/apex/SAPBandCostingController.getSAPAndCostSavings';
 import getCostingRecordsByPropertyOwner from '@salesforce/apex/SCIS_CostingController.getCostingRecordsByPropertyOwner';
+import { refreshApex } from '@salesforce/apex'; // Import refreshApex
+
 
 
 
@@ -43,6 +45,8 @@ export default class ScisFunderCosting extends LightningElement {
     @track costingRecords; // To store the costing records
     @track error; // To handle error state
     @track isLoading = true; // To handle loading state
+    wiredCostingResult; // To store the result of the wire service
+    refreshIntervalId; // To store the interval ID for auto-refresh
 
     // Fetch Survey details (Name and OwnerId)
     @wire(getRecord, { recordId: '$recordId', fields: FIELDS })
@@ -366,10 +370,20 @@ export default class ScisFunderCosting extends LightningElement {
 
  // Fetch the Costing records based on Property_Owner__c (recordId)
  @wire(getCostingRecordsByPropertyOwner, { propertyOwnerId: '$recordId' })
- wiredCostingRecords({ error, data }) {
+ wiredCostingRecords(result) {
+     this.wiredCostingResult = result; // Store the wired result for refreshing later
+     const { error, data } = result;
      if (data) {
          this.costingRecords = data;
          this.isLoading = false;
+
+         // If there is at least one costing record, show the summary
+         if (this.costingRecords.length > 0) {
+             this.isSummary = true;
+             this.isSaved = true;
+         } else {
+             this.isSummary = false;
+         }
      } else if (error) {
          this.error = error;
          this.isLoading = false;
@@ -381,6 +395,52 @@ export default class ScisFunderCosting extends LightningElement {
              })
          );
      }
-    }
+ }
+
+ // Automatically refresh the costing data every 30 seconds
+//  connectedCallback() {
+//      // Start the auto-refresh interval
+//      this.startAutoRefresh();
+//  }
+
+ disconnectedCallback() {
+     // Clear the interval when the component is destroyed
+     //this.stopAutoRefresh();
+     this.startAutoRefresh();
+ }
+
+ // Function to manually refresh costing data
+ refreshCostingData() {
+     this.isLoading = true;
+     refreshApex(this.wiredCostingResult)
+         .then(() => {
+             this.isLoading = false;
+         })
+         .catch(error => {
+             this.error = error;
+             this.isLoading = false;
+             this.dispatchEvent(
+                 new ShowToastEvent({
+                     title: 'Error refreshing costing records',
+                     message: error.body.message,
+                     variant: 'error',
+                 })
+             );
+         });
+ }
+
+ // Start the auto-refresh interval (every 30 seconds in this example)
+ startAutoRefresh() {
+     this.refreshIntervalId = setInterval(() => {
+         this.refreshCostingData(); // Refresh the data every 30 seconds
+     }, 30000); // 30 seconds
+ }
+
+ // Stop the auto-refresh interval
+ stopAutoRefresh() {
+     if (this.refreshIntervalId) {
+         clearInterval(this.refreshIntervalId);
+     }
+ }
     
 }
