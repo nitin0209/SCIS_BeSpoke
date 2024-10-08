@@ -1,0 +1,192 @@
+<template>
+    <lightning-card title="Measure Creation" icon-name="standard:apps">
+        <template if:false={isSaved}>
+        <!-- Show message if no measures are available -->
+        <template if:true={noMeasures}>
+            <div class="slds-col slds-size_1-of-1">
+                <p style="color: red;">This survey does not have any defined measures. Please add measures in the 'Define Measures' section.</p>
+            </div>
+        </template>
+
+        <!-- Hide all input fields if noMeasures is true -->
+        <template if:false={noMeasures}>
+
+            <!-- Gradient background applied -->
+            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium slds-p-around_medium slds-box"
+                style="background: linear-gradient(135deg, #6dd5ed, #2193b0); border-radius: 8px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);">
+                
+                <!-- Tabset for measure selection -->
+                <lightning-tabset variant="scoped" class="custom-tabset" onselect={handleTabChange}>
+                    
+                    <!-- First Tab for Ventilation -->
+                    <lightning-tab label="Ventilation" value="Ventilation">
+                        <div class="slds-p-around_medium slds-theme_default slds-box slds-card">
+                            <h3 class="slds-text-heading_medium">Ventilation </h3>
+                            <p class="slds-text-body_regular">Select the number of images and fill out details for ventilation.</p>
+
+                            <!-- Combobox for selecting the number of images -->
+                            <div class="slds-col slds-size_1-of-2 slds-p-left_small">
+                                <lightning-combobox
+                                    label="Select Number of Images"
+                                    value={imageCount}
+                                    placeholder="Select Number of Images"
+                                    options={imageOptions}
+                                    onchange={handleImageCountChange}
+                                    required>
+                                </lightning-combobox>
+                            </div>
+
+                            <!-- Dynamically created rows based on the selected number of images -->
+                            <template if:true={rowList.length}>
+                                <div class="slds-col slds-size_1-of-1 slds-m-top_medium">
+                                    <template for:each={rowList} for:item="row">
+                                        <div key={row.id} class="slds-box slds-m-bottom_medium slds-p-around_small slds-theme_alert-texture">
+                                            <!-- Image Name input field -->
+                                            <lightning-input
+                                                label={row.imageNameLabel}
+                                                data-id={row.id}
+                                                value={row.name} 
+                                                onchange={handleNameChange}
+                                                required>
+                                            </lightning-input>
+
+                                            <!-- Image Description textarea -->
+                                            <lightning-textarea
+                                                label={row.imageInstructionsLabel}
+                                                data-id={row.id}
+                                                value={row.instructions} 
+                                                onchange={handleDescriptionChange}
+                                                required>
+                                            </lightning-textarea>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+
+                            <!-- Save Button centered at bottom -->
+                            <div class="slds-col slds-align_absolute-center slds-m-top_medium">
+                                <lightning-button label="SAVE" onclick={handleSave} variant="brand"></lightning-button>
+                            </div>
+                        </div>
+                    </lightning-tab>
+
+                    <!-- Second Tab for Cavity Wall Insulation -->
+                    <lightning-tab label="Cavity Wall Insulation" value="Cavity Wall Insulation">
+                        <div class="slds-p-around_medium slds-theme_default slds-box slds-card">
+                            <h3 class="slds-text-heading_medium">Cavity Wall Insulation </h3>
+                            <p class="slds-text-body_regular">Select the number of images and fill out details for cavity wall insulation.</p>
+
+                            <!-- Combobox for selecting the number of images -->
+                            <div class="slds-col slds-size_1-of-2 slds-p-left_small">
+                                <lightning-combobox
+                                    label="Select Number of Images"
+                                    value={imageCount}
+                                    placeholder="Select Number of Images"
+                                    options={imageOptions}
+                                    onchange={handleImageCountChange}
+                                    required>
+                                </lightning-combobox>
+                            </div>
+
+                            <!-- Dynamically created rows based on the selected number of images -->
+                            <template if:true={rowList.length}>
+                                <div class="slds-col slds-size_1-of-1 slds-m-top_medium">
+                                    <template for:each={rowList} for:item="row">
+                                        <div key={row.id} class="slds-box slds-m-bottom_medium slds-p-around_small slds-theme_alert-texture">
+                                            <!-- Image Name input field -->
+                                            <lightning-input
+                                                label={row.imageNameLabel}
+                                                data-id={row.id}
+                                                value={row.name} 
+                                                onchange={handleNameChange}
+                                                required>
+                                            </lightning-input>
+
+                                            <!-- Image Description textarea -->
+                                            <lightning-textarea
+                                                label={row.imageInstructionsLabel}
+                                                data-id={row.id}
+                                                value={row.instructions} 
+                                                onchange={handleDescriptionChange}
+                                                required>
+                                            </lightning-textarea>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+
+                            <!-- Save Button centered at bottom -->
+                            <div class="slds-col slds-align_absolute-center slds-m-top_medium">
+                                <lightning-button label="SAVE" onclick={handleSave} variant="brand"></lightning-button>
+                            </div>
+                        </div>
+                    </lightning-tab>
+
+                    <!-- Third Tab for Loft Insulation -->
+                    <lightning-tab label="Loft Insulation" value="Loft Insulation">
+                        <div class="slds-p-around_medium slds-theme_default slds-box slds-card">
+                            <h3 class="slds-text-heading_medium">Loft Insulation </h3>
+                            <p class="slds-text-body_regular">Select the number of images and fill out details for loft insulation.</p>
+
+                            <!-- Combobox for selecting the number of images -->
+                            <div class="slds-col slds-size_1-of-2 slds-p-left_small">
+                                <lightning-combobox
+                                    label="Select Number of Images"
+                                    value={imageCount}
+                                    placeholder="Select Number of Images"
+                                    options={imageOptions}
+                                    onchange={handleImageCountChange}
+                                    required>
+                                </lightning-combobox>
+                            </div>
+
+                            <!-- Dynamically created rows based on the selected number of images -->
+                            <template if:true={rowList.length}>
+                                <div class="slds-col slds-size_1-of-1 slds-m-top_medium">
+                                    <template for:each={rowList} for:item="row">
+                                        <div key={row.id} class="slds-box slds-m-bottom_medium slds-p-around_small slds-theme_alert-texture">
+                                            <!-- Image Name input field -->
+                                            <lightning-input
+                                                label={row.imageNameLabel}
+                                                data-id={row.id}
+                                                value={row.name} 
+                                                onchange={handleNameChange}
+                                                required>
+                                            </lightning-input>
+
+                                            <!-- Image Description textarea -->
+                                            <lightning-textarea
+                                                label={row.imageInstructionsLabel}
+                                                data-id={row.id}
+                                                value={row.instructions} 
+                                                onchange={handleDescriptionChange}
+                                                required>
+                                            </lightning-textarea>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+
+                            <!-- Save Button centered at bottom -->
+                            <div class="slds-col slds-align_absolute-center slds-m-top_medium">
+                                <lightning-button label="SAVE" onclick={handleSave} variant="brand"></lightning-button>
+                            </div>
+                        </div>
+                    </lightning-tab>
+                </lightning-tabset>
+            </div>
+        </template>
+    </template>
+    </lightning-card>
+
+        <!-- Success Message and Finish Button shown after saving -->
+        <template if:true={isSaved}>
+            <div class="slds-p-around_medium slds-box slds-theme_success slds-text-align_center">
+                <h2 class="slds-text-heading_medium">Success!</h2>
+                <p class="slds-text-body_regular">The measure has been successfully created.</p>
+                
+                <!-- Finish Button -->
+                <lightning-button label="Finish" variant="success" onclick={handleFinish}></lightning-button>
+            </div>
+        </template>
+</template>
