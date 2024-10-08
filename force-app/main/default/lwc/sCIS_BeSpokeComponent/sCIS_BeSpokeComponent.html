@@ -25,7 +25,7 @@
                             <p class="slds-text-body_regular">Select the number of images and fill out details for ventilation.</p>
 
                             <!-- Combobox for selecting the number of images -->
-                            <div class="slds-col slds-size_1-of-2 slds-p-left_small">
+                            <div class="slds-col slds-size_1-of-2 slds-p-left_small slds-m-bottom_medium">
                                 <lightning-combobox
                                     label="Select Number of Images"
                                     value={imageCount}
@@ -174,8 +174,37 @@
                         </div>
                     </lightning-tab>
                 </lightning-tabset>
+
+                <div class="slds-p-around_medium slds-box slds-theme_default" style="border-radius: 10px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);">
+            
+                    <!-- Scrollable Data Table Section -->
+                    <div class="slds-scrollable_y" style="max-height: 300px; margin-top: 20px;">
+                        <template if:true={bespokeRecords}>
+                            <lightning-datatable
+                                key-field="Id"
+                                data={bespokeRecords}
+                                columns={columns}
+                                hide-checkbox-column="true"
+                                class="custom-datatable">
+                            </lightning-datatable>
+                        </template>
+        
+                        <!-- No records found message -->
+                        <template if:false={bespokeRecords}>
+                            <div class="slds-text-align_center slds-m-around_medium">
+                                <lightning-icon icon-name="utility:warning" alternative-text="No records" size="small"></lightning-icon>
+                                <p class="slds-text-body_regular slds-text-color_weak">No bespoke records found.</p>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+
             </div>
+
+           
         </template>
+        
     </template>
     </lightning-card>
 

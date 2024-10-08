@@ -109,7 +109,7 @@ export default class SCISBspoke extends LightningElement {
         const tabsetElement = this.template.querySelector('lightning-tabset');
         const activeTab = tabsetElement.activeTabValue; // Get the active tab value
         this.isSaved = true;
-        
+        window.scrollTo(0, 0);
         if (!activeTab) {
             this.showToast('Error', 'Please select a measure before saving12.', 'error');
             return;
@@ -169,6 +169,8 @@ export default class SCISBspoke extends LightningElement {
         // Logic for finishing, such as navigating to another page or resetting the form
         this.resetForm();
         this.isSaved=false;
+
+        window.scrollTo(0, 0);
     }
 
     // Reset the form after finishing
